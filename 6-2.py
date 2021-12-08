@@ -10,14 +10,24 @@ def file_to_list(file_location):
     return file_in
 
 input_file = file_to_list('inputs/6.txt')
-days = 18
+days = 256
+
+fish_horde = {}
+for i in range(9):
+    fish_horde[i] = 0
+
+for i in input_file:
+    fish_horde[i] += 1
 
 for i in range(days):
-    for fish in range(0, len(input_file)):
-        if input_file[fish] == 0:
-            input_file[fish] = 6
-            input_file.append(8)
-        else:
-            input_file[fish] -= 1
+    spawn = fish_horde[0]
+    for j in range(8):
+        fish_horde[j] = fish_horde[j + 1]
+    fish_horde[6] += spawn
+    fish_horde[8] = spawn
 
-print(len(input_file))
+total = 0
+for i in range(9):
+    total += fish_horde[i]
+
+print('Answer: ' + str(total))
