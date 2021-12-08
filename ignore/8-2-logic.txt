@@ -1,0 +1,130 @@
+ aaaa
+b    c
+b    c
+ dddd
+e    f
+e    f
+ gggg
+
+Normal Position: abcdefg
+
+1: cf
+
+7: acf
+
+4: bcdf
+
+2: acdeg
+3: acdfg
+5: abdfg
+
+0: abcefg
+6: abdefg
+9: abcdfg
+
+8: abcdefg
+
+8:acedgfb 5:1:cdfbe 2:1:gcdfa 3:1:fbcad 7:dab 9:1:cefabd 6:1:cdfgeb 4:eafb 0:1:cagedb 1:ab | 5 cdfeb 3 fcadb 5 cdfeb 3cdbaf
+
+format: regular list, each set of letters is a string
+
+Solved for A, B, C, D, E, F, G
+Solved for 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+mapping = {}
+
+for i in range(left_list):
+  if len(left_list[i]) == 7:
+    mapping['out8'] = left_list[i]
+  if len(left_list[i]) == 2:
+    mapping['out1'] = left_list[i]
+  if len(left_list[i]) == 3:
+    mapping['out7'] = left_list[i]
+    for j in list(mapping['out7']):
+      if j not in list(mapping['out1']):
+        mapping['posA'] = j
+
+print(mapping)
+  if len(left_list[i]) == 4:
+    mapping['out4'] = left_list[i]
+    for j in list(mapping['out4']):
+      if j not in list(mapping['out1']):
+        bd_pool.append(j)
+
+    letters that don't match out1 are bd_pool
+
+
+  if len(left_list[i]) == 5:
+  	for j in list(mapping['out1']):
+  	  if j not in list(left_list[i]):
+  	    break
+  	  else:
+  	    mapping['out5'] = left_list[i]
+  	    if k not in list(mapping['out7']):
+	        bd_pool.append(k)
+  
+
+
+  if matching letter in bd_pool and dg_pool:
+    said letter is posD
+  other letter in bd_pool:
+    said letter is posB
+
+for i in range(len(left_list)):
+	if len(left_list[i]) == 6 and mapping['posA'] in list(left_list[i]) and mapping['posB'] in list(left_list[i]) and mapping['posD'] in list(left_list[i]):
+		mapping['out9'] = left_list[i]
+
+for i in list(mapping['out9']):
+	if i not in list(mapping['out5']):
+		mapping['posG'] = i
+
+
+  if length is 6, has PosA PosB PosD and Out1
+    is out9
+    odd letter out is posG
+
+for i in range(len(left_list)):
+	if len(left_list[i]) == 5 and mapping['posA'] in list(left_list[i]) and mapping['posB'] in list(left_list[i]) and mapping['posD'] in list(left_list[i]) and mapping['posG'] in list(left_list[i]):
+		mapping['out5'] = left_list[i]
+
+for i in list(mapping['out5']):
+	if i not in [mapping['posA'], mapping['posB'], mapping['posD'], mapping['posG']]:
+		mapping['posF'] = i
+
+  if length is 5 and has posA, posB, posD, posG:
+    is out5
+    odd letter out is posF
+
+for i in list(mapping['pos4']):
+	if i not in [mapping['posB'], mapping['posD'], mapping['posF']]:
+		mapping['posC'] = i
+
+  odd letter out in out4:
+    is posC
+
+for i in list('abcdefg'):
+	if i not in [mapping['posA'], mapping['posB'], mapping['posC'], mapping['posD'], mapping['posF'], mapping['posG']]:
+		mapping['posE'] = i
+
+  out letter out in positions:
+    is posE
+
+for i in range(len(left_list)):
+	for j in [mapping['posA'], mapping['posC'], mapping['posD'], mapping['posE'], mapping['posG']]:
+		if j not in list(i):
+		break
+	mapping['out2'] = i
+
+  if has positions acdeg:
+    is out2
+
+# Determine letters comprising 0.
+for i in range(len(left_list)):
+    for j in [mapping['posA'], mapping['posB'], mapping['posC'], mapping['posE'], mapping['posF'], mapping['posG']]:
+        if j not in list(left_list[i]):
+            break
+    mapping['out0'] = left_list[i]
+  if has positions abcefg:
+    is out0
+  if has positions abdefg:
+    is out6
