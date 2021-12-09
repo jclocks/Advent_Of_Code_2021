@@ -2,7 +2,7 @@
 
 import fileinput
 
-file_location = 'inputs/8.txt'
+file_location = 'inputs/8-practice.txt'
 
 def file_read(loc):
     file_in = []
@@ -103,17 +103,18 @@ for i in list('abcdefg'):
 		mapping['posE'] = i
 
 # Determine letters comprising 2.
-for i in range(len(left_list)):
-    for j in [mapping['posA'], mapping['posC'], mapping['posD'], mapping['posE'], mapping['posG']]:
-        if j not in list(left_list[i]):
-            break
-    mapping['out2'] = left_list[i]
+def char_in_string(char, stri):
+    for i in stri:
+        if char == i:
+            return True
+    return False
 
-# Determine letters comprising 0.
+
 for i in range(len(left_list)):
-    for j in [mapping['posA'], mapping['posB'], mapping['posC'], mapping['posE'], mapping['posF'], mapping['posG']]:
-        if j not in list(left_list[i]):
-            break
-    mapping['out0'] = left_list[i]
+    if len(left_list[i]) == 5:
+        for j in [mapping['posA'], mapping['posC'], mapping['posD'], mapping['posE'], mapping['posG']]:
+            if not char_in_string(j, left_list[i]):
+                break
+            mapping['out2'] = left_list[i]
 
 print(mapping)
